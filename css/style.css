@@ -1,0 +1,175 @@
+/**
+ * =================================================================
+ * VIP Smart Gateway - Main Stylesheet
+ * Annaba Digital Portal
+ * Professional Build 2026
+ * =================================================================
+ */
+
+/* ========== ROOT VARIABLES & THEMING ========== */
+
+:root {
+    --vip-royal: #0f2748;
+    --vip-blue: #2563eb;
+    --vip-cyan: #06b6d4;
+    --vip-bg: #f8fafc;
+}
+
+/* ========== BASE STYLES ========== */
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background-color: var(--vip-bg);
+    color: #1e293b;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, .changa-font {
+    font-family: 'Changa', sans-serif;
+}
+
+/* ========== GRADIENT & TEXT EFFECTS ========== */
+
+.text-gradient {
+    background: linear-gradient(135deg, var(--vip-blue), var(--vip-cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.bg-gradient-vip {
+    background: linear-gradient(135deg, var(--vip-royal) 0%, #1e3a8a 50%, #0891b2 100%);
+    background-size: 200% 200%;
+    animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ========== HEADER & NAVIGATION ========== */
+
+header {
+    transition: all 0.4s ease;
+}
+
+header.is-scrolled {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ========== BENTO GRID LAYOUT ========== */
+
+#bento-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.bento-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -10px rgba(15, 39, 72, 0.05);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -10px rgba(6, 182, 212, 0.15);
+}
+
+.bento-card::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(6, 182, 212, 0.08), transparent 40%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.bento-card:hover::before { 
+    opacity: 1; 
+}
+
+.bento-content { 
+    position: relative; 
+    z-index: 2; 
+    height: 100%; 
+}
+
+/* Grid Spans */
+.span-col-2 { grid-column: span 2; }
+.span-col-3 { grid-column: span 3; }
+.span-col-4 { grid-column: span 4; }
+.span-row-2 { grid-row: span 2; }
+
+/* ========== RESPONSIVE GRID ========== */
+
+@media (max-width: 1024px) {
+    #bento-grid { grid-template-columns: repeat(2, 1fr); }
+    .span-col-2, .span-col-3, .span-col-4 { grid-column: span 2; }
+}
+
+@media (max-width: 640px) {
+    #bento-grid { grid-template-columns: 1fr; }
+    .span-col-2, .span-col-3, .span-col-4 { grid-column: span 1; }
+}
+
+/* ========== ANIMATIONS ========== */
+
+.reveal-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.floating-element {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ========== FORM INPUTS ========== */
+
+.vip-input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.vip-input:focus {
+    background: #fff;
+    border-color: var(--vip-cyan);
+    box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.1);
+    outline: none;
+}
+
+/* ========== DELAY UTILITIES ========== */
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }

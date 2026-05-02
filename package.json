@@ -1,0 +1,97 @@
+{
+  "name": "anaba-vip-gateway",
+  "version": "1.0.0",
+  "description": "بوابة عنابة الرقمية | VIP Smart Gateway - Comprehensive Digital Platform for Annaba Province",
+  "main": "index.html",
+  "type": "module",
+  "keywords": [
+    "annaba",
+    "digital",
+    "smart-city",
+    "gateway",
+    "platform",
+    "algeria",
+    "vip",
+    "web-application",
+    "arabic",
+    "responsive"
+  ],
+  "author": {
+    "name": "VIP Smart Gateway Team",
+    "email": "info@anaba-vip.dz",
+    "url": "https://www.anaba-vip.dz"
+  },
+  "license": "Proprietary",
+  "homepage": "https://www.anaba-vip.dz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/anaba-vip.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/anaba-vip/issues",
+    "email": "support@anaba-vip.dz"
+  },
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 3000",
+    "build": "echo 'No build step required - all files are static'",
+    "serve": "npx http-server -p 8000",
+    "lint": "echo 'Add ESLint for code quality checks'",
+    "test": "echo 'Add testing framework for unit tests'"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 1%",
+    "Firefox ESR",
+    "not dead"
+  ],
+  "dependencies": {
+    "tailwindcss": "^3.3.0",
+    "lucide-icons": "latest",
+    "sweetalert2": "^11.0.0",
+    "google-fonts": "^1.0.0"
+  },
+  "devDependencies": {},
+  "files": [
+    "index.html",
+    "css/",
+    "js/",
+    "assets/",
+    "README.md",
+    "package.json"
+  ],
+  "directories": {
+    "css": "css",
+    "js": "js",
+    "assets": "assets",
+    "doc": "docs"
+  },
+  "metadata": {
+    "buildDate": "2026-05-02",
+    "version": "1.0.0",
+    "status": "production",
+    "language": "ar",
+    "region": "DZ",
+    "timezone": "Africa/Algiers",
+    "colors": {
+      "primary": "#2563eb",
+      "accent": "#06b6d4",
+      "dark": "#0f2748",
+      "background": "#f8fafc"
+    },
+    "accessibility": {
+      "wcag": "AA",
+      "rtl": true,
+      "multilang": false
+    },
+    "performance": {
+      "lighthouse": 90,
+      "pageLoadTime": "< 2s",
+      "cls": 0.1
+    }
+  }
+}
