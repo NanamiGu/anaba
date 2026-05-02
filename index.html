@@ -3,29 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="بوابة عنابة الرقمية - منصة الجيل القادم لخدمة المواطن">
-    <meta name="keywords" content="عنابة, رقمية, ذكية, خدمات">
-    <meta name="author" content="VIP Smart Gateway Team">
-    
     <title>بوابة عنابة الرقمية | VIP Smart Gateway</title>
-    
-    <!-- External Stylesheets -->
-    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Changa:wght@400;600;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    
-    <!-- External Libraries -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
+    
+    <style>
+        :root {
+            --vip-royal: #0f2748;
+            --vip-blue: #2563eb;
+            --vip-cyan: #06b6d4;
+            --vip-bg: #f8fafc;
+        }
 
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--vip-bg);
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .changa-font {
+            font-family: 'Changa', sans-serif;
+        }
+
+        /* VIP Premium Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--vip-blue), var(--vip-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .bg-gradient-vip {
+            background: linear-gradient(135deg, var(--vip-royal) 0%, #1e3a8a 50%, #0891b2 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 10s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Header */
+        header {
+            transition: all 0.4s ease;
+        }
+        header.is-scrolled {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* VIP Bento Grid with Mouse Spotlight */
+        #bento-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .bento-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(15, 39, 72, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(6, 182, 212, 0.15);
+        }
+
+        /* The Magic Spotlight for Light Theme */
+        .bento-card::before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(6, 182, 212, 0.08), transparent 40%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .bento-card:hover::before { opacity: 1; }
+
+        .bento-content { position: relative; z-index: 2; height: 100%; }
+
+        /* Grid Spans */
+        .span-col-2 { grid-column: span 2; }
+        .span-col-3 { grid-column: span 3; }
+        .span-col-4 { grid-column: span 4; }
+        .span-row-2 { grid-row: span 2; }
+
+        @media (max-width: 1024px) {
+            #bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .span-col-2, .span-col-3, .span-col-4 { grid-column: span 2; }
+        }
+        @media (max-width: 640px) {
+            #bento-grid { grid-template-columns: 1fr; }
+            .span-col-2, .span-col-3, .span-col-4 { grid-column: span 1; }
+        }
+
+        /* Advanced Animations */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.in-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Custom Input Styling */
+        .vip-input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .vip-input:focus {
+            background: #fff;
+            border-color: var(--vip-cyan);
+            box-shadow: 0 0 0 4px rgba(6, 182, 212, 0.1);
+            outline: none;
+        }
+    </style>
+</head>
 <body class="antialiased selection:bg-cyan-200 selection:text-cyan-900">
 
-    <!-- ========== AMBIENT BACKGROUND ELEMENTS ========== -->
+    <!-- Ambient Background Elements -->
     <div class="fixed top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-blue-400/20 blur-[120px] pointer-events-none z-[-1]"></div>
     <div class="fixed bottom-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-cyan-400/20 blur-[120px] pointer-events-none z-[-1]"></div>
 
-    <!-- ========== VIP HEADER ========== -->
+    <!-- VIP Header -->
     <header class="fixed top-0 w-full z-50 py-4 border-b border-transparent">
         <nav class="container max-w-7xl mx-auto px-6 flex justify-between items-center">
             <!-- Logo -->
@@ -66,8 +203,9 @@
         </div>
     </header>
 
-    <!-- ========== HERO SECTION ========== -->
+    <!-- Hero Section (Fusion of Dark Elegance & Light Clarity) -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 min-h-[90vh] flex items-center overflow-hidden">
+        <!-- Abstract VIP Pattern -->
         <div class="absolute inset-0 z-0 opacity-5" style="background-image: radial-gradient(#2563eb 1px, transparent 1px); background-size: 30px 30px;"></div>
         
         <div class="container max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
@@ -143,7 +281,7 @@
         </div>
     </section>
 
-    <!-- ========== VIP BENTO GRID SERVICES ========== -->
+    <!-- VIP Bento Grid Services -->
     <section id="services" class="py-24 px-6 relative z-10">
         <div class="container max-w-7xl mx-auto">
             <div class="text-center max-w-2xl mx-auto mb-16 reveal-up">
@@ -237,7 +375,7 @@
         </div>
     </section>
 
-    <!-- ========== INTERACTIVE IDEAS SECTION ========== -->
+    <!-- Interactive Ideas Section -->
     <section id="ideas" class="py-24 bg-white relative">
         <div class="container mx-auto px-6 max-w-7xl">
             <div class="flex items-center gap-4 mb-16 reveal-up">
@@ -336,7 +474,7 @@
         </div>
     </section>
 
-    <!-- ========== PREMIUM DARK FOOTER ========== -->
+    <!-- Premium Dark Footer -->
     <footer class="bg-[#0b162c] text-slate-300 pt-20 pb-10 border-t border-blue-900/50">
         <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
             
@@ -385,8 +523,94 @@
         </div>
     </footer>
 
-    <!-- ========== EXTERNAL SCRIPTS ========== -->
-    <script src="js/main.js"></script>
+    <!-- Interactive Scripts -->
+    <script>
+        // 1. Initialize Icons
+        lucide.createIcons();
 
+        // 2. Glassmorphism Header Scroll
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('is-scrolled');
+            } else {
+                header.classList.remove('is-scrolled');
+            }
+        });
+
+        // 3. Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        menuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if(isMenuOpen) {
+                mobileMenu.classList.remove('max-h-0', 'opacity-0');
+                mobileMenu.classList.add('max-h-96', 'opacity-100');
+                menuBtn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+            } else {
+                mobileMenu.classList.add('max-h-0', 'opacity-0');
+                mobileMenu.classList.remove('max-h-96', 'opacity-100');
+                menuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+            }
+            lucide.createIcons();
+        });
+
+        // 4. Magic Mouse Spotlight for VIP Bento Grid
+        const bentoGrid = document.getElementById("bento-grid");
+        const cards = document.querySelectorAll(".bento-card");
+
+        bentoGrid.onmousemove = e => {
+            for(const card of cards) {
+                const rect = card.getBoundingClientRect(),
+                      x = e.clientX - rect.left,
+                      y = e.clientY - rect.top;
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            }
+        };
+
+        // 5. Scroll Reveal Animations
+        const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+        // 6. VIP Form Submissions (SweetAlert2)
+        document.getElementById('ideaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'مبادرة رائعة!',
+                text: 'تم استلام مبادرتك وسيتم عرضها للتصويت قريباً.',
+                icon: 'success',
+                confirmButtonText: 'ممتاز',
+                confirmButtonColor: '#2563eb',
+                background: '#ffffff',
+                customClass: { popup: 'rounded-3xl' }
+            });
+            this.reset();
+        });
+
+        document.getElementById('subscribeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'تم الاشتراك',
+                text: 'أهلاً بك في نشرة عنابة الذكية!',
+                icon: 'success',
+                confirmButtonText: 'إغلاق',
+                confirmButtonColor: '#2563eb',
+                customClass: { popup: 'rounded-3xl' }
+            });
+            this.reset();
+        });
+    </script>
 </body>
 </html>
